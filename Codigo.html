@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Codigo</title>
+</head>
+<body>
+	<div>
+		<h2>Codigo</h2>
+		<p>fluents:
+fasePreparar(P) requires #int(P).
+ingredienteSeco(M) requires#int(M).
+ingredianteLiquido(L) requires#int(L).
+rellenoFruta(F) requires#int(F).
+Hornear(R) requires#int(R).
+PastelListo(S) requires#int(S).
+actions:
+batirMantequilla.
+mezclarAzucar.
+mezclarHarina.
+mezclarPolvo.
+batirHuevos.
+mezclarCocoa.
+batirLeche.
+batirVainilla.
+agregarMango.
+agregarDurazno.
+agregarFresa.
+agregarKiwi.
+Hornearmasa.
+Final.
+always:
+ executable mezclarAzucar if ingredienteSeco(CON),CON>=1, fasePreparar(0). 
+	caused ingredienteSeco(New) if Old=New+1 after mezclarAzucar, ingredienteSeco(Old).
+	caused -ingredienteSeco(Old) after mezclarAzucar, ingredienteSeco(Old). 
+	caused fasePreparar(1) after mezclarAzucar.
+
+ executable mezclarHarina if ingredienteSeco(CON),CON>=1, fasePreparar(0). 
+	caused ingredienteSeco(New) if Old=New+1 after mezclarHarina, ingredienteSeco(Old).
+	caused -ingredienteSeco(Old) after mezclarHarina, ingredienteSeco(Old). 
+	caused fasePreparar(1) after mezclarHarina.
+
+ executable mezclarPolvo if ingredienteSeco(CON),CON>=1, fasePreparar(0). 
+	caused ingredienteSeco(New) if Old=New+1 after mezclarPolvo, ingredienteSeco(Old).
+	caused -ingredienteSeco(Old) after mezclarPolvo, ingredienteSeco(Old). 
+	caused fasePreparar(1) after mezclarPolvo.
+
+ executable mezclarCocoa if ingredienteSeco(CON),CON>=1, fasePreparar(0). 
+	caused ingredienteSeco(New) if Old=New+1 after mezclarCocoa, ingredienteSeco(Old).
+	caused -ingredienteSeco(Old) after mezclarCocoa, ingredienteSeco(Old). 
+	caused fasePreparar(1) after mezclarCocoa.
+
+ executable batirMantequilla if ingredianteLiquido(CON),CON>=1, fasePreparar(1). 
+	caused ingredianteLiquido(New) if Old=New+1 after batirMantequilla, ingredianteLiquido(Old).
+	caused -ingredianteLiquido(Old) after batirMantequilla, ingredianteLiquido(Old). 
+	caused fasePreparar(2) after batirMantequilla.
+
+ executable batirHuevos if ingredianteLiquido(CON),CON>=1, fasePreparar(1). 
+	caused ingredianteLiquido(New) if Old=New+1 after batirHuevos, ingredianteLiquido(Old).
+	caused -ingredianteLiquido(Old) after batirHuevos, ingredianteLiquido(Old). 
+	caused fasePreparar(2) after batirHuevos.
+
+ executable batirLeche if ingredianteLiquido(CON),CON>=1, fasePreparar(1). 
+	caused ingredianteLiquido(New) if Old=New+1 after batirLeche, ingredianteLiquido(Old).
+	caused -ingredianteLiquido(Old) after batirLeche, ingredianteLiquido(Old). 
+	caused fasePreparar(2) after batirLeche.
+
+ executable batirVainilla if ingredianteLiquido(CON),CON>=1, fasePreparar(1). 
+	caused ingredianteLiquido(New) if Old=New+1 after batirVainilla, ingredianteLiquido(Old).
+	caused -ingredianteLiquido(Old) after batirVainilla, ingredianteLiquido(Old). 
+	caused fasePreparar(2) after batirVainilla.
+
+ executable agregarMango if rellenoFruta(CON),CON>=1, fasePreparar(2). 
+	caused rellenoFruta(New) if Old=New+1 after agregarMango, rellenoFruta(Old).
+	caused -rellenoFruta(Old) after agregarMango, rellenoFruta(Old). 
+	caused fasePreparar(3) after agregarMango.
+
+ executable agregarDurazno if rellenoFruta(CON),CON>=1, fasePreparar(2). 
+	caused rellenoFruta(New) if Old=New+1 after agregarDurazno, rellenoFruta(Old).
+	caused -rellenoFruta(Old) after agregarDurazno, rellenoFruta(Old). 
+	caused fasePreparar(3) after agregarDurazno.
+
+ executable agregarFresa if rellenoFruta(CON),CON>=1, fasePreparar(2). 
+	caused rellenoFruta(New) if Old=New+1 after agregarFresa, rellenoFruta(Old).
+	caused -rellenoFruta(Old) after agregarFresa, rellenoFruta(Old). 
+	caused fasePreparar(3) after agregarFresa.
+
+ executable agregarKiwi if rellenoFruta(CON),CON>=1, fasePreparar(2). 
+	caused rellenoFruta(New) if Old=New+1 after agregarKiwi, rellenoFruta(Old).
+	caused -rellenoFruta(Old) after agregarKiwi, rellenoFruta(Old). 
+	caused fasePreparar(3) after agregarKiwi.
+
+ executable Hornearmasa if Hornear(CON),CON>=1, fasePreparar(3). 
+	caused Hornear(New) if Old=New+1 after Hornearmasa, Hornear(Old).
+	caused -Hornear(Old) after Hornearmasa, Hornear(Old). 
+	caused fasePreparar(4) after Hornearmasa.
+
+ executable Final if PastelListo(CON),CON>=0, fasePreparar(4). 
+	caused PastelListo(New) if Old=New+1 after Final, PastelListo(Old).
+	caused -PastelListo(Old) after Final, PastelListo(Old). 
+	caused fasePreparar(5) after Final.
+
+inertial ingredienteSeco(M).
+inertial ingredianteLiquido(L).
+inertial rellenoFruta(F).
+inertial Hornear(R).
+inertial PastelListo(S).
+
+initially:
+fasePreparar(0).
+ingredienteSeco(1).
+ingredianteLiquido(1).
+rellenoFruta(1).
+Hornear(1).
+PastelListo(0).
+goal:fasePreparar(5)?(5)</p>
+		</div>
+	<img width="1350" src="img/C1.png">
+	<img width="1350" src="img/C2.png">
+	<img width="1350" src="img/C3.png">
+	<nav>
+		<center><a href="index.html">Regresar</a></center>
+	</nav>
+
+</body>
+</html>
